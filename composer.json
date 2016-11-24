@@ -1,0 +1,16 @@
+{
+    "name": "marktopper/doctrine-dbal-timestamp-type",
+    "description": "Add the timestamp type for Doctrine/DBAL",
+    "keywords": ["mysql", "doctrine", "dbal", "timestamp", "database", "laravel"],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "php": ">=5.6.4",
+        "doctrine/dbal": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "MarkTopper\\DoctrineDBALTimestampType\\": "src/"
+        }
+    }
+}
