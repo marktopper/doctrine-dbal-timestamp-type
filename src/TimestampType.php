@@ -27,9 +27,9 @@ class TimestampType extends Type
     {
         $name = $platform->getName();
 
-        if (!in_array($name, ['mysql'])) {
+        if (in_array($name, ['mysql'])) {
             $method = 'get'.ucfirst($name).'PlatformSQLDeclaration';
-            $this->$method($fieldDeclaration);
+            return $this->$method($fieldDeclaration);
         }
 
         throw DBALException::notSupported(__METHOD__);
