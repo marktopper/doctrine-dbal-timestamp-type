@@ -9,7 +9,10 @@ class Laravel5ServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Type::addType('timestamp', TimestampType::class);
+        if (!Type::hasType('timestamp')) {
+            Type::addType('timestamp', TimestampType::class);
+    
+        }
     }
 
     public function register()
