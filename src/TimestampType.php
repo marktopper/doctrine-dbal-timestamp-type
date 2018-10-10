@@ -2,9 +2,9 @@
 
 namespace MarkTopper\DoctrineDBALTimestampType;
 
-use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\Type;
 
 class TimestampType extends Type
 {
