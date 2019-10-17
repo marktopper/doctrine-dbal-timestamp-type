@@ -16,7 +16,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MarkTopper\\DoctrineDBALTimestampType\\Laravel5ServiceProvider"
+                "MarkTopper\\DoctrineDBALTimestampType\\LaravelServiceProvider"
             ]
         }
     }
