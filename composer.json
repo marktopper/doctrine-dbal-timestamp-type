@@ -12,5 +12,12 @@
         "psr-4": {
             "MarkTopper\\DoctrineDBALTimestampType\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MarkTopper\\DoctrineDBALTimestampType\\Laravel5ServiceProvider"
+            ]
+        }
     }
 }
