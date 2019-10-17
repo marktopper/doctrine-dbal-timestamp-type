@@ -11,7 +11,6 @@ class LaravelServiceProvider extends ServiceProvider
     {
         if (!Type::hasType('timestamp')) {
             Type::addType('timestamp', TimestampType::class);
-    
         }
     }
 
