@@ -17,5 +17,7 @@ Then add the type to `Doctrine\DBAL`:
 ### Laravel 5
 You can use the Laravel Provider to ensure that the type is added to Doctrine\DBAL by adding the following to providers:
 ```
-MarkTopper\DoctrineDBALTimestampType\Laravel5ServiceProvider::class,
+MarkTopper\DoctrineDBALTimestampType\LaravelServiceProvider::class,
 ```
+
+For Laravel > 5.5 this service provider will be loaded automatically.
