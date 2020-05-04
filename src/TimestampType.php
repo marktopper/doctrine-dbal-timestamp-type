@@ -29,6 +29,7 @@ class TimestampType extends Type
 
         if (in_array($name, ['mysql', 'sqlite'])) {
             $method = 'get'.ucfirst($name).'PlatformSQLDeclaration';
+
             return $this->$method($fieldDeclaration);
         }
 
@@ -44,11 +45,13 @@ class TimestampType extends Type
      */
     protected function getMysqlPlatformSQLDeclaration(array $fieldDeclaration)
     {
+        $columnType = $fieldDeclaration['precision'] ? "TIMESTAMP({$fieldDeclaration['precision']})" : 'TIMESTAMP';
+
         if (isset($fieldDeclaration['notnull']) && $fieldDeclaration['notnull'] == true) {
-            return 'TIMESTAMP';
+            return $columnType;
         }
 
-        return 'TIMESTAMP NULL';
+        return "$columnType NULL";
     }
 
     /**
