@@ -25,7 +25,18 @@ class TimestampType extends Type
      */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
-        $name = $platform->getName();
+        $name = '';
+        if (method_exists($platform, 'getName')) {
+            $name = $platform->getName();
+        } else {
+            $platformClass = get_class($platform);
+
+            if (strpos($platformClass, 'MySQL') !== false) {
+                $name = 'mysql';
+            } elseif (strpos($platformClass, 'Sqlite') !== false) {
+                $name = 'sqlite';
+            }
+        }
 
         if (in_array($name, ['mysql', 'sqlite'])) {
             $method = 'get'.ucfirst($name).'PlatformSQLDeclaration';
