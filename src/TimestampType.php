@@ -4,6 +4,7 @@ namespace MarkTopper\DoctrineDBALTimestampType;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\Exception\NotSupported;
 use Doctrine\DBAL\Types\Type;
 
 class TimestampType extends Type
@@ -23,9 +24,20 @@ class TimestampType extends Type
      *
      * @return string
      */
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
-        $name = $platform->getName();
+        $name = '';
+        if (method_exists($platform, 'getName')) {
+            $name = $platform->getName();
+        } else {
+            $platformClass = get_class($platform);
+
+            if (strpos($platformClass, 'MySQL') !== false || strpos($platformClass, 'MariaDB') !== false) {
+                $name = 'mysql';
+            } elseif (strpos($platformClass, 'Sqlite') !== false) {
+                $name = 'sqlite';
+            }
+        }
 
         if (in_array($name, ['mysql', 'sqlite'])) {
             $method = 'get'.ucfirst($name).'PlatformSQLDeclaration';
@@ -33,7 +45,11 @@ class TimestampType extends Type
             return $this->$method($fieldDeclaration);
         }
 
-        throw DBALException::notSupported(__METHOD__);
+        if (class_exists('Doctrine\DBAL\DBALException')) {
+            throw DBALException::notSupported(__METHOD__);
+        }
+
+        throw NotSupported::new(__METHOD__);
     }
 
     /**
