@@ -3,8 +3,8 @@
 namespace MarkTopper\DoctrineDBALTimestampType;
 
 use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Platforms\Exception\NotSupported;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\Exception\NotSupported;
 use Doctrine\DBAL\Types\Type;
 
 class TimestampType extends Type
